@@ -4,5 +4,6 @@ version = "0.1.0"
 description = "Utility functions for Justfiles"
 authors = [{ name = "whs31", email = "riazantsev.dl@edu.spbstu.ru" }]
 dependencies = [
-
+    "pyyaml",
+    "termcolor"
 ]
