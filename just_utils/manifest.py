@@ -19,5 +19,9 @@ class Manifest:
         self._data = _parse(path)
         self.package = self._data.get("package")
 
-    def pretty_print(self):
+    def pretty_print(self, verbose=True):
+        if not verbose:
+            return
+        print("-- manifest --")
         cprint(yaml.dump(self._data), "yellow")
+        print()

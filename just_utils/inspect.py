@@ -76,7 +76,10 @@ class ConanFileMetadata:
             return "stable"
         return "dev"
 
-    def pretty_print(self):
+    def pretty_print(self, verbose=True):
+        if not verbose:
+            return
+        print("-- conanfile --")
         print(f"name:                {colored(self.name, 'magenta', attrs=['bold'])}")
         print(f"user:                {colored(self.user, 'green')}")
         print(f"url:                 {colored(self.url, 'green')}")
@@ -117,3 +120,4 @@ class ConanFileMetadata:
         print(f"is_rc:               {colored(self.is_rc, 'yellow')}")
         print(f"is_dev:              {colored(self.is_dev, 'yellow')}")
         print(f"preferred_channel:   {colored(self.preferred_channel, 'yellow')}")
+        print()
