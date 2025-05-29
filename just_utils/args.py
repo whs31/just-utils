@@ -7,7 +7,7 @@ def print_arg(name, value, color="yellow"):
     print(f"{name:<25}: {arg:<25}")
 
 
-def default_cmake_parser(additional_choosers=None):
+def default_cmake_parser(additional_choosers=[]):
     parser = argparse.ArgumentParser(
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
