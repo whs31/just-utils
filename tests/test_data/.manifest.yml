@@ -1,0 +1,12 @@
+---
+directories:
+  project_name: rolly
+  project_org: Radar MMS
+package:
+  vendor: radar
+version:
+  header:
+    path: "include/version.h"
+    macro_prefix: "CORONA"
+  plugin_meta:
+    path: "meta/meta.yml"

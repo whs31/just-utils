@@ -14,10 +14,19 @@ def _parse(path: Path):
 
 
 class Manifest:
-    def __init__(self, path: Path):
+    def __init__(self, path: Path = Path.cwd() / ".manifest.yml"):
         self.path = path
         self._data = _parse(path)
         self.package = self._data.get("package")
+
+    def __getitem__(self, key):
+        return self._data[key]
+
+    def __setitem__(self, key, value):
+        self._data[key] = value
+
+    def __contains__(self, key):
+        return key in self._data
 
     def pretty_print(self, verbose=True):
         if not verbose:

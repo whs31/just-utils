@@ -1,0 +1,11 @@
+---
+uuid: 12b5e0f0-6d83-11d0-94ab-0080c74c7e95
+name: Corona
+version: 2.8.12
+description: Интерфейс управления радиолокационной станцией "Квазар" и система просмотра,
+  обработки и анализа радиолокационных изображений
+domain: com.whs31.quasar.corona
+organization: whs31
+logger_id: corona
+quick_view: qrc:/corona/Entry.qml
+icon: qrc:/corona/wireframe_icon.svg

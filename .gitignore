@@ -1,3 +1,7 @@
 build/**
 *.egg-info
 *.lock
+*.pyc
+*.pyo
+*.so
+*.swp
