@@ -146,4 +146,37 @@ def patch_version(version: semver.Version, root: Path = Path.cwd()):
     if 'plugin_meta' in manifest['version'] and 'path' in manifest['version']['plugin_meta']:
         _write_plugin_metadata(root / manifest['version']['plugin_meta']['path'], version)
 
-    
+def versions(root: Path = Path.cwd(), patch: bool = False):
+    manifest = Manifest(root / ".manifest.yml")
+
+    res = [_read_conan(root / "conanfile.py"), _read_cmake(root / "CMakeLists.txt")]
+
+    if 'version' not in manifest:
+        return res
+
+    if 'header' in manifest['version'] and 'macro_prefix' in manifest['version']['header'] and 'path' in manifest['version']['header']:
+        version_header_path = root / manifest['version']['header']['path']
+        res.append(_read_version_header(version_header_path, manifest['version']['header']['macro_prefix']))
+    if 'plugin_meta' in manifest['version'] and 'path' in manifest['version']['plugin_meta']:
+        plugin_meta_path = root / manifest['version']['plugin_meta']['path']
+        res.append(_read_plugin_metadata(plugin_meta_path))
+
+    # if res is not homogeneous, patch with the lowest version
+    if patch and len(set(res)) > 1:
+        patch_version(min(res), root)
+        return versions(root, patch=False)
+
+    return res
+
+def bump_version_major(root: Path = Path.cwd()):
+    ver = min(versions(root))
+    patch_version(ver.bump_major(), root)
+
+def bump_version_minor(root: Path = Path.cwd()):
+    ver = min(versions(root))
+    patch_version(ver.bump_minor(), root)
+
+def bump_version_patch(root: Path = Path.cwd()):
+    ver = min(versions(root))
+    patch_version(ver.bump_patch(), root)
+
